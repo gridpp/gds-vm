@@ -41,11 +41,13 @@ while read processors vo
 do
   # 1 gridpp must be last (it's used in omitting the final comma)
 
+export processors vo
+
 if [ $processors -gt 1 ] ; then
-  processors_str="$processors"
+  export processors_str="$processors"
   export dirac_opts="--maxNumberOfProcessors $processors"
 else
-  processors_str=""
+  export processors_str=""
   export dirac_opts=""
 fi
 
@@ -91,7 +93,7 @@ cat <<EOF >>all-vos.pipe
     "machine_model": "cernvm3",
     "min_wallclock_seconds": 50000,
     "max_wallclock_seconds": 100000,
-    "max_processors": $maxprocessors,
+    "max_processors": $processors,
     "root_image": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/cernvm3.iso",
     "suffix": "vm$processors_str-$vohyphens",
     "target_share": 1.0,
@@ -103,7 +105,7 @@ cat <<EOF >>all-vos.pipe
    }
 EOF
 
-if [ "$vo" != "gridpp" ] ; then
+if [ "$vo" != "gridpp" -o "$processors" -ne 1 ] ; then
   echo ',' >> all-vos.pipe
 fi
   
