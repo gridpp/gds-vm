@@ -23,7 +23,9 @@ cat <<EOF
  1 vo.scotgrid.ac.uk 
  1 pheno 
  1 lz 
+ 4 lsst
  1 lsst
+ 8 skatelescope.eu
  1 skatelescope.eu
  1 solidexperiment.org 
  1 dune 
@@ -83,6 +85,12 @@ cat <<EOF >$vohyphens$processors_str.pipe
 }
 EOF
   
+if [ "$needcomma" != "" ] ; then
+  echo ',' >> all-vos.pipe
+else
+  needcomma="yes"
+fi
+  
 cat <<EOF >>all-vos.pipe
    {
     "accounting_fqan": "/$vo/Role=NULL/Capability=NULL",
@@ -105,10 +113,6 @@ cat <<EOF >>all-vos.pipe
    }
 EOF
 
-if [ "$vo" != "gridpp" -o "$processors" -ne 1 ] ; then
-  echo ',' >> all-vos.pipe
-fi
-  
 done
 )
 
