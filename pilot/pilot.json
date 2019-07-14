@@ -1,0 +1,106 @@
+{
+   "Setups": {
+     "GridPP": {
+       "CheckVersion": "True",
+       "Commands": {
+         "Vcycle": [
+           "CheckWorkerNode",
+           "InstallDIRAC",
+           "ConfigureBasics",
+           "CheckWNCapabilities",
+           "ConfigureSite",
+           "ConfigureArchitecture",
+           "ConfigureCPURequirements",
+           "MultiLaunchAgent"
+         ],
+         "Vac": [
+           "CheckWorkerNode",
+           "InstallDIRAC",
+           "ConfigureBasics",
+           "CheckCECapabilities",
+           "CheckWNCapabilities",
+           "ConfigureSite",
+           "ConfigureArchitecture",
+           "ConfigureCPURequirements",
+           "MultiLaunchAgent"
+         ]
+       },
+      "Version": "v6r19p4"
+     },
+     "Defaults": {
+       "ConfigurationServer": "dips://dirac01.grid.hep.ph.ic.ac.uk:9135/Configuration/Server",
+       "GenericPilotGroup": "gridpp_pilot"
+     }
+   },
+   "CEs": {
+     "vac.ph.bham.ac.uk": {
+       "Site": "VAC.UKI-SOUTHGRID-BHAM-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "vac1.hep.phy.cam.ac.uk": {
+       "Site": "VAC.UKI-SOUTHGRID-CAM-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "vac.gla.scotgrid.ac.uk": {
+       "Site": "VAC.UKI-SCOTGRID-GLASGOW.uk",
+       "GridCEType": "Vac"
+     },
+     "vac01.ph.liv.ac.uk": {
+       "Site": "VAC.UKI-NORTHGRID-LIV-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "vac01.blackett.manchester.ac.uk": {
+       "Site": "VAC.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "vac02.tier2.hep.manchester.ac.uk": {
+       "Site": "VAC.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "vac02.blackett.manchester.ac.uk": {
+       "Site": "VAC.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "vac03.blackett.manchester.ac.uk": {
+       "Site": "VAC.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "vac04.blackett.manchester.ac.uk": {
+       "Site": "VAC.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "t2vacuum.physics.ox.ac.uk": {
+       "Site": "VAC.UKI-SOUTHGRID-OX-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "vac.ppgrid1.rhul.ac.uk": {
+       "Site": "VAC.UKI-LT2-RHUL.uk",
+       "GridCEType": "Vac"
+     },
+     "vac01.hep.ucl.ac.uk": {
+       "Site": "VAC.UKI-LT2-UCL-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "vcycle-cern.blackett.manchester.ac.uk": {
+       "Site": "CLOUD.CERN-PROD.ch",
+       "GridCEType": "Vcycle"
+     },
+     "iccloud.gridpp.ac.uk": {
+       "Site": "CLOUD.UKI-GridPP-Cloud-IC.uk",
+       "GridCEType": "Vcycle"
+     },
+     "ce01.tier2.hep.manchester.ac.uk": {
+       "Site": "LCG.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "ce02.tier2.hep.manchester.ac.uk": {
+       "Site": "LCG.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vac"
+     },
+     "ce03.tier2.hep.manchester.ac.uk": {
+       "Site": "LCG.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vac"
+     }
+   },    
+   "DefaultSetup": "GridPP"
+}

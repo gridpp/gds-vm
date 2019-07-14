@@ -1,0 +1,119 @@
+#!/bin/sh
+
+pwd | grep '/dev/' >/dev/null 2>/dev/null
+
+if [ $? = 0 ] ; then
+  export DEV='/dev'
+fi
+
+cat <<EOF >all-vos.pipe
+{
+  "cache_seconds": 3600,
+  "machinetypes":
+  [
+EOF
+
+(
+cat <<EOF
+ 1 comet.j-parc.jp
+ 1 na62.vo.gridpp.ac.uk 
+ 1 cernatschool.org 
+ 1 t2k.org 
+ 1 snoplus.snolab.ca 
+ 1 vo.scotgrid.ac.uk 
+ 1 pheno 
+ 1 lz 
+ 1 lsst
+ 1 skatelescope.eu
+ 1 solidexperiment.org 
+ 1 dune 
+ 1 vo.moedal.org 
+ 1 mice 
+ 1 hyperk.org 
+ 1 magrid 
+ 1 vo.northgrid.ac.uk 
+ 8 gridpp 
+ 1 gridpp 
+EOF
+) | (
+
+while read processors vo
+do
+  # 1 gridpp must be last (it's used in omitting the final comma)
+
+if [ $processors -gt 1 ] ; then
+  processors_str="$processors"
+  export dirac_opts="--maxNumberOfProcessors $processors"
+else
+  processors_str=""
+  export dirac_opts=""
+fi
+
+export dirac_opts="$dirac_opts -o /Resources/Computing/CEDefaults/SubmitPool=Pool_$vo -o /Resources/Computing/CEDefaults/VirtualOrganization=$vo -g v13r0"
+
+export vohyphens=`echo $vo | sed 's/\./-/g'`
+
+cat <<EOF >$vohyphens$processors_str.pipe
+{
+  "cache_seconds": 3600,
+  "machinetypes":
+  [
+   {
+    "accounting_fqan": "/$vo/Role=NULL/Capability=NULL",
+    "backoff_seconds": 600,
+    "fizzle_seconds": 600,
+    "heartbeat_file": "heartbeat",
+    "heartbeat_seconds": 600,
+    "machine_model": "cernvm3",
+    "min_wallclock_seconds": 50000,
+    "max_wallclock_seconds": 100000,
+    "max_processors": $processors,
+    "root_image": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/cernvm3.iso",
+    "suffix": "vm$processors_str-$vohyphens",
+    "target_share": 1.0,
+    "user_data": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/pilot/user_data_vm_prod",
+    "user_data_file_hostcert": "hostcert.pem",
+    "user_data_file_hostkey": "hostkey.pem",
+    "user_data_option_dirac_opts": "$dirac_opts",
+    "user_data_option_vo": "$vo"
+   }
+  ]
+}
+EOF
+  
+cat <<EOF >>all-vos.pipe
+   {
+    "accounting_fqan": "/$vo/Role=NULL/Capability=NULL",
+    "backoff_seconds": 3600,
+    "fizzle_seconds": 600,
+    "heartbeat_file": "heartbeat",
+    "heartbeat_seconds": 600,
+    "machine_model": "cernvm3",
+    "min_wallclock_seconds": 50000,
+    "max_wallclock_seconds": 100000,
+    "max_processors": $maxprocessors,
+    "root_image": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/cernvm3.iso",
+    "suffix": "vm$processors_str-$vohyphens",
+    "target_share": 1.0,
+    "user_data": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/pilot/user_data_vm_prod",
+    "user_data_file_hostcert": "hostcert.pem",
+    "user_data_file_hostkey": "hostkey.pem",
+    "user_data_option_dirac_opts": "$dirac_opts",
+    "user_data_option_vo": "$vo"
+   }
+EOF
+
+if [ "$vo" != "gridpp" ] ; then
+  echo ',' >> all-vos.pipe
+fi
+  
+done
+)
+
+cat <<EOF >>all-vos.pipe
+  ]
+}
+EOF
+
+sed 's/"target_share": 1.0/"target_share": 0.0/' all-vos.pipe > all-vos-zero-shares.pipe
+
