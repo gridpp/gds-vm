@@ -499,8 +499,8 @@ class CheckWNCapabilities(CommandBase):
         self.pp.tags.append('MultiProcessor')
 #      if 'MultiProcessor' not in self.pp.reqtags:
 #        self.pp.reqtags.append('MultiProcessor')
-#      if ('%dProcessors' % self.pp.payloadProcessors) not in self.pp.tags:
-#        self.pp.tags.append('%dProcessors' % self.pp.payloadProcessors)
+      if ('%dProcessors' % self.pp.payloadProcessors) not in self.pp.tags:
+        self.pp.tags.append('%dProcessors' % self.pp.payloadProcessors)
       if ('%dProcessors' % self.pp.payloadProcessors) not in self.pp.reqtags:
         self.pp.reqtags.append('%dProcessors' % self.pp.payloadProcessors)
 
