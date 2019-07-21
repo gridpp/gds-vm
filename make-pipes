@@ -15,35 +15,34 @@ EOF
 
 (
 cat <<EOF
- 1 comet.j-parc.jp
- 1 na62.vo.gridpp.ac.uk 
- 1 cernatschool.org 
- 1 t2k.org 
- 1 snoplus.snolab.ca 
- 1 vo.scotgrid.ac.uk 
- 1 pheno 
- 1 lz 
- 4 lsst
- 1 lsst
- 8 skatelescope.eu
- 1 skatelescope.eu
- 1 solidexperiment.org 
- 1 dune 
- 1 vo.moedal.org 
- 1 mice 
- 1 hyperk.org 
- 1 magrid 
- 1 vo.northgrid.ac.uk 
- 8 gridpp 
- 1 gridpp 
+ 1 cernvm3 comet.j-parc.jp
+ 1 cernvm3 na62.vo.gridpp.ac.uk 
+ 1 cernvm3 cernatschool.org 
+ 1 cernvm3 t2k.org 
+ 1 cernvm3 snoplus.snolab.ca 
+ 1 cernvm3 vo.scotgrid.ac.uk 
+ 1 cernvm3 pheno 
+ 1 cernvm3 lz 
+ 4 cernvm3 lsst
+ 1 cernvm3 lsst
+ 8 cernvm3 skatelescope.eu
+ 1 cernvm3 skatelescope.eu
+ 1 cernvm3 solidexperiment.org 
+ 1 cernvm3 dune 
+ 1 cernvm3 vo.moedal.org 
+ 1 cernvm3 mice 
+ 1 cernvm3 hyperk.org 
+ 1 cernvm3 magrid 
+ 1 cernvm3 vo.northgrid.ac.uk 
+ 8 cermvm3 gridpp 
+ 1 cernvm4 gridpp 
 EOF
 ) | (
 
-while read processors vo
+while read processors cernvmVersion vo
 do
-  # 1 gridpp must be last (it's used in omitting the final comma)
 
-export processors vo
+export processors cernvmVersion vo
 
 if [ $processors -gt 1 ] ; then
   export processors_str="$processors"
@@ -73,7 +72,7 @@ cat <<EOF >$vohyphens$processors_str.pipe
     "max_wallclock_seconds": 100000,
     "min_processors": $processors,
     "max_processors": $processors,
-    "root_image": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/cernvm3.iso",
+    "root_image": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/$cernvmVersion.iso",
     "suffix": "vm$processors_str-$vohyphens",
     "target_share": 1.0,
     "user_data": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/pilot/user_data_vm_prod",
@@ -104,7 +103,7 @@ cat <<EOF >>all-vos.pipe
     "max_wallclock_seconds": 100000,
     "min_processors": $processors,
     "max_processors": $processors,
-    "root_image": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/cernvm3.iso",
+    "root_image": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/$cernvmVersion.iso",
     "suffix": "vm$processors_str-$vohyphens",
     "target_share": 1.0,
     "user_data": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/pilot/user_data_vm_prod",
