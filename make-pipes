@@ -25,8 +25,8 @@ cat <<EOF
  1 cernvm3 lz 
  4 cernvm3 lsst
  1 cernvm3 lsst
- 8 cernvm3 skatelescope.eu
- 1 cernvm3 skatelescope.eu
+ 8 cernvm4 skatelescope.eu
+ 1 cernvm4 skatelescope.eu
  1 cernvm3 solidexperiment.org 
  1 cernvm3 dune 
  1 cernvm3 vo.moedal.org 
@@ -34,7 +34,7 @@ cat <<EOF
  1 cernvm3 hyperk.org 
  1 cernvm3 magrid 
  1 cernvm3 vo.northgrid.ac.uk 
- 8 cermvm3 gridpp 
+ 8 cernvm4 gridpp 
  1 cernvm4 gridpp 
 EOF
 ) | (
@@ -46,7 +46,7 @@ export processors cernvmVersion vo
 
 if [ $processors -gt 1 ] ; then
   export processors_str="$processors"
-  export dirac_opts="--maxNumberOfProcessors $processors"
+  export dirac_opts="--maxNumberOfProcessors $processors --tag MultiProcessor --tag ${processors}Processors --requiredTag ${processors}Processors"
 else
   export processors_str=""
   export dirac_opts=""
