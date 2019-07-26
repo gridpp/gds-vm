@@ -15,25 +15,25 @@ EOF
 
 (
 cat <<EOF
- 1 cernvm3 comet.j-parc.jp
- 1 cernvm3 na62.vo.gridpp.ac.uk 
- 1 cernvm3 cernatschool.org 
- 1 cernvm3 t2k.org 
- 1 cernvm3 snoplus.snolab.ca 
- 1 cernvm3 vo.scotgrid.ac.uk 
- 1 cernvm3 pheno 
- 1 cernvm3 lz 
- 4 cernvm3 lsst
- 1 cernvm3 lsst
+ 1 cernvm4 comet.j-parc.jp
+ 1 cernvm4 na62.vo.gridpp.ac.uk 
+ 1 cernvm4 cernatschool.org 
+ 1 cernvm4 t2k.org 
+ 1 cernvm4 snoplus.snolab.ca 
+ 1 cernvm4 vo.scotgrid.ac.uk 
+ 1 cernvm4 pheno 
+ 1 cernvm4 lz 
+ 4 cernvm4 lsst
+ 1 cernvm4 lsst
  8 cernvm4 skatelescope.eu
  1 cernvm4 skatelescope.eu
- 1 cernvm3 solidexperiment.org 
- 1 cernvm3 dune 
- 1 cernvm3 vo.moedal.org 
- 1 cernvm3 mice 
- 1 cernvm3 hyperk.org 
- 1 cernvm3 magrid 
- 1 cernvm3 vo.northgrid.ac.uk 
+ 1 cernvm4 solidexperiment.org 
+ 1 cernvm4 dune 
+ 1 cernvm4 vo.moedal.org 
+ 1 cernvm4 mice 
+ 1 cernvm4 hyperk.org 
+ 1 cernvm4 magrid 
+ 1 cernvm4 vo.northgrid.ac.uk 
  8 cernvm4 gridpp 
  1 cernvm4 gridpp 
 EOF
