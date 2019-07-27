@@ -6,6 +6,9 @@ if [ $? = 0 ] ; then
   export DEV='/dev'
 fi
 
+/bin/echo -n > volist.tmp
+/bin/echo -n > for.html
+
 cat <<EOF >all-vos.pipe
 {
   "cache_seconds": 3600,
@@ -15,27 +18,27 @@ EOF
 
 (
 cat <<EOF
- 1 cernvm4 comet.j-parc.jp
- 1 cernvm4 na62.vo.gridpp.ac.uk 
  1 cernvm4 cernatschool.org 
- 1 cernvm4 t2k.org 
- 1 cernvm4 snoplus.snolab.ca 
- 1 cernvm4 vo.scotgrid.ac.uk 
- 1 cernvm4 pheno 
- 1 cernvm4 lz 
- 4 cernvm4 lsst
- 1 cernvm4 lsst
- 8 cernvm4 skatelescope.eu
- 1 cernvm4 skatelescope.eu
- 1 cernvm4 solidexperiment.org 
+ 1 cernvm4 comet.j-parc.jp
  1 cernvm4 dune 
- 1 cernvm4 vo.moedal.org 
- 1 cernvm4 mice 
- 1 cernvm4 hyperk.org 
- 1 cernvm4 magrid 
- 1 cernvm4 vo.northgrid.ac.uk 
- 8 cernvm4 gridpp 
  1 cernvm4 gridpp 
+ 8 cernvm4 gridpp 
+ 1 cernvm4 hyperk.org 
+ 1 cernvm4 lsst
+ 4 cernvm4 lsst
+ 1 cernvm4 lz 
+ 1 cernvm4 magrid 
+ 1 cernvm4 mice 
+ 1 cernvm4 na62.vo.gridpp.ac.uk 
+ 1 cernvm4 pheno 
+ 1 cernvm4 skatelescope.eu
+ 8 cernvm4 skatelescope.eu
+ 1 cernvm4 snoplus.snolab.ca 
+ 1 cernvm4 solidexperiment.org 
+ 1 cernvm4 t2k.org 
+ 1 cernvm4 vo.moedal.org 
+ 1 cernvm4 vo.northgrid.ac.uk 
+ 1 cernvm4 vo.scotgrid.ac.uk 
 EOF
 ) | (
 
@@ -87,10 +90,15 @@ EOF
   
 if [ "$needcomma" != "" ] ; then
   echo ',' >> all-vos.pipe
+  /bin/echo ', ' >> volist.tmp
+  /bin/echo -n ', ' >> for.html
 else
   needcomma="yes"
 fi
   
+/bin/echo -n "$vo" >> volist.tmp
+/bin/echo -n "gds-vm$processors_str-$vohyphens" >> for.html
+
 cat <<EOF >>all-vos.pipe
    {
     "accounting_fqan": "/$vo/Role=NULL/Capability=NULL",
@@ -124,3 +132,7 @@ EOF
 
 sed 's/"target_share": 1.0/"target_share": 0.0/' all-vos.pipe > all-vos-zero-shares.pipe
 
+echo >> for.html
+echo >> for.html
+echo `sort volist.tmp | uniq` >> for.html
+rm -f volist.tmp

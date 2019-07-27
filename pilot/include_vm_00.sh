@@ -46,8 +46,10 @@ export DEPO_BASE_URL='https://depo.gridpp.ac.uk/hosts'
 export LCG_GFAL_INFOSYS="topbdii.grid.hep.ph.ic.ac.uk:2170"
 
 ##
-## Update singularity
+## Update singularity if installed (CernVM4)
 ##
+if [ -x /usr/bin/singularity ] ; then
+
 (
 rpm -e --nodeps singularity singularity-runtime
 # Tell yum to use the current Squid proxy used by cvmfs
@@ -90,3 +92,4 @@ memory fs type = tmpfs
 always use nv = no
 EOF
 
+fi
