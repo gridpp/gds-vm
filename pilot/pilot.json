@@ -81,11 +81,15 @@
        "Site": "VAC.UKI-LT2-UCL-HEP.uk",
        "GridCEType": "Vac"
      },
-     "vcycle-cern.tier2.hep.manchester.ac.uk": {
-       "Site": "CLOUD.CERN-PROD.ch",
+     "vcycle-cam.blackett.manchester.ac.uk": {
+       "Site": "CLOUD.UKI-NORTHGRID-MAN-HEP.uk",
        "GridCEType": "Vcycle"
      },
      "vcycle-cern.blackett.manchester.ac.uk": {
+       "Site": "CLOUD.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vcycle"
+     },
+     "vcycle-ral.blackett.manchester.ac.uk": {
        "Site": "CLOUD.UKI-NORTHGRID-MAN-HEP.uk",
        "GridCEType": "Vcycle"
      },
