@@ -59,6 +59,8 @@ export dirac_opts="$dirac_opts -o /Resources/Computing/CEDefaults/SubmitPool=Poo
 
 export vohyphens=`echo $vo | sed 's/\./-/g'`
 
+# NB this is repeated in the all-vos.pipe file below too
+
 cat <<EOF >$vohyphens$processors_str.pipe
 {
   "cache_seconds": 3600,
@@ -78,7 +80,7 @@ cat <<EOF >$vohyphens$processors_str.pipe
     "root_image": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/$cernvmVersion.iso",
     "suffix": "vm$processors_str-$vohyphens",
     "target_share": 1.0,
-    "user_data": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/pilot/user_data_vm_prod",
+    "user_data": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/pilot/user_data_vm",
     "user_data_file_hostcert": "hostcert.pem",
     "user_data_file_hostkey": "hostkey.pem",
     "user_data_option_dirac_opts": "$dirac_opts",
@@ -114,7 +116,7 @@ cat <<EOF >>all-vos.pipe
     "root_image": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/$cernvmVersion.iso",
     "suffix": "vm$processors_str-$vohyphens",
     "target_share": 1.0,
-    "user_data": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/pilot/user_data_vm_prod",
+    "user_data": "https://repo.gridpp.ac.uk/vacproject$DEV/gds/pilot/user_data_vm",
     "user_data_file_hostcert": "hostcert.pem",
     "user_data_file_hostkey": "hostkey.pem",
     "user_data_option_dirac_opts": "$dirac_opts",
