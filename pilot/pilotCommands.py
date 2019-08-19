@@ -1082,7 +1082,7 @@ class MultiLaunchAgent(CommandBase):
         ################################################################################################
         # This detects using an RFC proxy to talk to legacy-only DIRAC
         ['Error while handshaking [("Remote certificate hasn', '500 Certificate/proxy not acceptable'],
-        # This detects something misconfigured/missing about the site in the DIRAC CS
+        # This detects something misconfigured/missing about the site in the DIRAC CS or in the VM
         ['NOTICE: Failed to get jobs: Error requesting job', '500 Error when requesting payload job'],
 
         # Variants of: "600 Grid-wide problem with job agent or application within VM"
