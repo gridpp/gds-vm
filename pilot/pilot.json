@@ -7,6 +7,7 @@
            "CheckWorkerNode",
            "InstallDIRAC",
            "ConfigureBasics",
+           "CheckCECapabilities",
            "CheckWNCapabilities",
            "ConfigureSite",
            "ConfigureArchitecture",
@@ -53,10 +54,6 @@
        "Site": "VAC.UKI-NORTHGRID-MAN-HEP.uk",
        "GridCEType": "Vac"
      },
-     "vac02.tier2.hep.manchester.ac.uk": {
-       "Site": "VAC.UKI-NORTHGRID-MAN-HEP.uk",
-       "GridCEType": "Vac"
-     },
      "vac02.blackett.manchester.ac.uk": {
        "Site": "VAC.UKI-NORTHGRID-MAN-HEP.uk",
        "GridCEType": "Vac"
@@ -86,7 +83,7 @@
        "GridCEType": "Vcycle"
      },
      "vcycle-cern.blackett.manchester.ac.uk": {
-       "Site": "CLOUD.UKI-NORTHGRID-MAN-HEP.uk",
+       "Site": "CLOUD.CERN-PROD.ch",
        "GridCEType": "Vcycle"
      },
      "vcycle-ral.blackett.manchester.ac.uk": {
