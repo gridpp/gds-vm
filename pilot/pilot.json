@@ -86,6 +86,10 @@
        "Site": "CLOUD.CERN-PROD.ch",
        "GridCEType": "Vcycle"
      },
+     "vcycle-man.blackett.manchester.ac.uk": {
+       "Site": "CLOUD.UKI-NORTHGRID-MAN-HEP.uk",
+       "GridCEType": "Vcycle"
+     },
      "vcycle-ral.blackett.manchester.ac.uk": {
        "Site": "CLOUD.UKI-NORTHGRID-MAN-HEP.uk",
        "GridCEType": "Vcycle"
