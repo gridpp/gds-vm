@@ -1068,11 +1068,9 @@ class MultiLaunchAgent(CommandBase):
         #
         # !!! Codes 300-699 trigger Vac/Vcycle backoff procedure !!!
         #
-
         # Variants of: "300 No more work available from task queue"
         ###########################################################
         # We asked, but nothing more from the matcher.
-        ['INFO: JobAgent will stop with message "Nothing to do for more than', '300 Nothing to do'],
         ['Job request OK: No match found', '300 Nothing to do'],
 
         # Variants of: "400 Site/host/VM is currently banned/disabled from receiving more work"
@@ -1101,6 +1099,9 @@ class MultiLaunchAgent(CommandBase):
         ['INFO: JobAgent will stop with message "Payload execution failed with error code',
          '600 Payload execution failed with error'],
 
+        # Catch all "300 Nothing to do" test
+        ####################################
+        ['INFO: JobAgent will stop with message "Nothing to do for more than', '300 Nothing to do'],
     ]
 
     try:

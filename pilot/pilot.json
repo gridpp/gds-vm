@@ -79,7 +79,7 @@
        "GridCEType": "Vac"
      },
      "vcycle-cam.blackett.manchester.ac.uk": {
-       "Site": "CLOUD.UKI-NORTHGRID-MAN-HEP.uk",
+       "Site": "CLOUD.UK-CAM-CUMULUS.uk",
        "GridCEType": "Vcycle"
      },
      "vcycle-cern.blackett.manchester.ac.uk": {
