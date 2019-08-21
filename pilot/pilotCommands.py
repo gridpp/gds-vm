@@ -1048,7 +1048,7 @@ class MultiLaunchAgent(CommandBase):
     """
 
     # catch-all in case nothing matches
-    shutdownMessage = '700 Failed, probably JobAgent or Application problem'
+    shutdownMessage = None
 
     # log file patterns to look for and corresponding messages
     messageMappings = [
@@ -1107,7 +1107,7 @@ class MultiLaunchAgent(CommandBase):
     try:
       with open(logFile, 'r') as f:
         oneline = f.readline()
-        while oneline:
+        while shutdownMessage is None and oneline:
           for pair in messageMappings:
             if pair[0] in oneline:
               shutdownMessage = pair[1]
@@ -1117,7 +1117,10 @@ class MultiLaunchAgent(CommandBase):
     except BaseException:
       return '700 Internal VM logging failed'
 
-    return shutdownMessage
+    if shutdownMessage is None:
+      return '700 Failed, probably JobAgent or Application problem'
+    else:
+      return shutdownMessage
 
   def execute(self):
     """ What is called all the time
