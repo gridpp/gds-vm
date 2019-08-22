@@ -107,50 +107,27 @@ fi
 # Once we have finished with the metadata, stop any user process reading it later
 /sbin/iptables -A OUTPUT -d 169.254.169.254 -p tcp --dport 80 -j DROP 
 
-# Get the big 40GB+ logical partition as /scratch
+# For the big 40GB+ logical partition
 mkdir -p /scratch
-if [ -b /dev/vdb1 -a -b /dev/vdb2 ] ; then
-  # Openstack at CERN with cvm* flavor? 
-  # vda1 is boot image, vdb1 is root partition, vdb2 is unformatted
-  mkfs -q -t ext4 /dev/vdb2
-  mount /dev/vdb2 /scratch 
-elif [ -b /dev/sda1 -a -b /dev/sda2 -a -b /dev/sda3 ] ; then
-  # GCE: sda1 is boot image, sda2 is root partition, sda3 is unformatted
-  mkfs -q -t ext4 /dev/sda3
-  mount /dev/sda3 /scratch
-elif [ -b /dev/vdb1 ] ; then
-  # Openstack at CERN with hep* flavor?
-  # vda1 is boot image, vdb1 is root partition, and no vdb2
-  # Since boot image is small, can use rest of vda for /scratch
-  echo -e 'n\np\n2\n\n\nw\n'| fdisk /dev/vda
-  mkfs -q -t ext4 /dev/vda2
-  mount /dev/vda2 /scratch 
-elif [ -b /dev/vdb ] ; then
-  # Efficient virtio device
-  mkfs -q -t ext4 /dev/vdb
-  mount /dev/vdb /scratch
-elif [ -b /dev/vda1 -a -b /dev/vda2 ] ; then
-  # We just have a big vda with unused space in vda2
-  mkfs -q -t ext4 /dev/vda2
-  mount /dev/vda2 /scratch
-elif [ -b /dev/sdb ] ; then
-  # Virtual SCSI
-  mkfs -q -t ext4 /dev/sdb
-  mount /dev/sdb /scratch
-elif [ -b /dev/hdb ] ; then
-  # Virtual IDE
-  mkfs -q -t ext4 /dev/hdb
-  mount /dev/hdb /scratch
-elif [ -b /dev/xvdb ] ; then
-  # Xen virtual disk device
-  mkfs -q -t ext4 /dev/xvdb
-  mount /dev/xvdb /scratch
-else
-  date --utc +'%Y-%m-%d %H:%M:%S %Z user_data_script Missing vdb/hdb/sdb/xvdb block device for /scratch'
-  echo "500 Missing vdb/hdb/sdb block device for /scratch" > /var/spool/joboutputs/shutdown_message
-  /sbin/shutdown -h now
-  sleep 1234567890
-fi  
+
+# Find the largest unformatted partition on any device
+sfdisk -sldu M | grep '^/dev/.*size=' | sed 's:\(/dev/[a-z]*[0-9]*\) .*size= *\([0-9]*\).*:\2 \1:' | sort -nr | (
+while read size device
+do
+  mkfs -q -t ext4 $device
+  if [ $? = 0 ] ; then
+   date --utc +"%Y-%m-%d %H:%M:%S %Z user_data_script Created $device for /scratch"
+   mount $device /scratch
+   break
+  fi
+done
+)
+
+# if
+#  date --utc +'%Y-%m-%d %H:%M:%S %Z user_data_script Missing vdb/hdb/sdb/xvdb block device for /scratch'
+#  echo "500 Missing vdb/hdb/sdb block device for /scratch" > /var/spool/joboutputs/shutdown_message
+#  /sbin/shutdown -h now
+#  sleep 1234567890
 
 if [ -b /dev/vda ] ; then
   # We rely on the hypervisor's disk I/O scheduling
