@@ -123,12 +123,6 @@ do
 done
 )
 
-# if
-#  date --utc +'%Y-%m-%d %H:%M:%S %Z user_data_script Missing vdb/hdb/sdb/xvdb block device for /scratch'
-#  echo "500 Missing vdb/hdb/sdb block device for /scratch" > /var/spool/joboutputs/shutdown_message
-#  /sbin/shutdown -h now
-#  sleep 1234567890
-
 if [ -b /dev/vda ] ; then
   # We rely on the hypervisor's disk I/O scheduling
   echo 'noop' > /sys/block/vda/queue/scheduler
