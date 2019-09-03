@@ -91,7 +91,7 @@
        "GridCEType": "Vcycle"
      },
      "vcycle-ral.blackett.manchester.ac.uk": {
-       "Site": "CLOUD.UKI-NORTHGRID-MAN-HEP.uk",
+       "Site": "CLOUD.RAL-LCG2.uk",
        "GridCEType": "Vcycle"
      },
      "iccloud.gridpp.ac.uk": {
