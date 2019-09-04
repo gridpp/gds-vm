@@ -168,15 +168,17 @@ fi
 cp $X509_USER_PROXY /root/x509proxy.pem # Save a copy which will stay owned by root, for root to use
 chmod 0400 /scratch/plt/etc/grid-security/*.pem /root/x509proxy.pem
 
-# Get CA certs from cvmfs
+# Get CA certs from cvmfs, and export location for SSL and Python
 rm -Rf /etc/grid-security
 ln -sf /cvmfs/grid.cern.ch/etc/grid-security /etc/grid-security
 export X509_CERT_DIR=/etc/grid-security/certificates
+export SSL_CERT_DIR=$X509_CERT_DIR
 
 # These will be picked up by login etc shells
 cat <<EOF > /etc/profile.d/grid-paths.sh
-export X509_CERT_DIR=/etc/grid-security/certificates
 export X509_VOMS_DIR=/etc/grid-security/vomsdir
+export X509_CERT_DIR=/etc/grid-security/certificates
+export SSL_CERT_DIR=/etc/grid-security/certificates
 EOF
 
 # make a first heartbeat
